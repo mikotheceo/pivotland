@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$PIVOT — From Solana to Ethereum</title>
+    <meta name="description" content="$PIVOT - The great migration from Solana meme coins to Ethereum. Make the PIVOT.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============ PAGE 1: SOLANA MEME WORLD ============ -->
+    <div id="page-solana" class="page active">
+        <!-- Background layers -->
+        <div id="bg-solana" class="bg-layer" style="background-image: url('back1.jpg')"></div>
+        <div id="bg-destruction" class="bg-layer" style="background-image: url('back12.jpg'); opacity: 0;"></div>
+        <div id="darkness-overlay" class="darkness-overlay"></div>
+
+        <!-- Floating Solana title -->
+        <div id="solana-title" class="solana-title">
+            <span class="title-glow">SOLANA</span>
+            <span class="title-sub">MEME WORLD</span>
+        </div>
+
+        <!-- Bouncing meme coins container -->
+        <div id="meme-coins-container"></div>
+
+        <!-- Meteors container -->
+        <div id="meteors-container"></div>
+
+        <!-- Screen shake overlay -->
+        <div id="screen-flash" class="screen-flash"></div>
+
+        <!-- Portal -->
+        <div id="portal-container" class="portal-container hidden">
+            <img src="portal.gif" alt="Portal" class="portal-gif">
+            <button id="pivot-btn" class="pivot-btn" onclick="goToEthereum()">$PIVOT</button>
+        </div>
+    </div>
+
+    <!-- ============ PAGE 2: ETHEREUM WORLD ============ -->
+    <div id="page-ethereum" class="page">
+        <div class="eth-bg"></div>
+
+        <!-- Navigation -->
+        <nav class="eth-nav">
+            <div class="eth-nav-logo">
+                <span class="eth-diamond">⟐</span>
+                <span class="eth-brand">$PIVOT</span>
+            </div>
+            <div class="eth-nav-links">
+                <a href="#about">About</a>
+                <a href="#tokenomics">Tokenomics</a>
+                <a href="#community">Community</a>
+                <a href="https://twitter.com" target="_blank" class="eth-nav-btn">Buy $PIVOT</a>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="eth-hero">
+            <div class="eth-hero-content">
+                <div class="eth-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path d="M23 4l-6 6-4-4-6 6"/><path d="M17 4h6v6"/></svg>The Great Migration</div>
+                <h1 class="eth-hero-title">
+                    We made the
+                    <span class="eth-highlight">$PIVOT</span>
+                </h1>
+                <p class="eth-hero-desc">
+                    Solana memes had their moment. The future of meme coins lives on <strong>Ethereum</strong>. 
+                    $PIVOT is the movement — bridging degens from SOL to ETH.
+                </p>
+                <div class="eth-hero-actions">
+                    <button class="eth-btn-primary" onclick="window.open('#','_blank')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg> Buy on Uniswap
+                    </button>
+                    <button class="eth-btn-secondary" onclick="window.open('#','_blank')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> DexScreener
+                    </button>
+                </div>
+                <div class="eth-contract">
+                    <span class="eth-contract-label">CA:</span>
+                    <span class="eth-contract-addr" id="contract-addr">0x000...coming soon</span>
+                    <button class="eth-copy-btn" onclick="copyCA()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+                </div>
+            </div>
+            <div class="eth-hero-image">
+                <img src="meme1.jpg" alt="ETH Memes" class="eth-meme-img">
+                <div class="eth-hero-image-glow"></div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="eth-section">
+            <div class="eth-section-inner">
+                <h2 class="eth-section-title">Why <span class="eth-highlight">$PIVOT</span>?</h2>
+                <div class="eth-cards">
+                    <div class="eth-card">
+                        <div class="eth-card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+                        <h3>Solana is Dying</h3>
+                        <p>Rug after rug. The Solana meme coin era is over. Smart money already left.</p>
+                    </div>
+                    <div class="eth-card">
+                        <div class="eth-card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--eth-blue)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                        <h3>Make the PIVOT</h3>
+                        <p>$PIVOT is the bridge between the old world and the new. One token to rule them all.</p>
+                    </div>
+                    <div class="eth-card">
+                        <div class="eth-card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#14f195" stroke-width="1.5"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 3 0 3 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-3 0-3"/></svg></div>
+                        <h3>ETH is Home</h3>
+                        <p>Real liquidity. Real infrastructure. Real community. Ethereum is where memes thrive forever.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenomics -->
+        <section id="tokenomics" class="eth-section eth-section-alt">
+            <div class="eth-section-inner">
+                <h2 class="eth-section-title">Tokenomics</h2>
+                <div class="eth-tokenomics">
+                    <div class="eth-token-item">
+                        <div class="eth-token-value">1,000,000,000</div>
+                        <div class="eth-token-label">Total Supply</div>
+                    </div>
+                    <div class="eth-token-divider"></div>
+                    <div class="eth-token-item">
+                        <div class="eth-token-value">0%</div>
+                        <div class="eth-token-label">Buy/Sell Tax</div>
+                    </div>
+                    <div class="eth-token-divider"></div>
+                    <div class="eth-token-item">
+                        <div class="eth-token-value">100%</div>
+                        <div class="eth-token-label">LP Burned</div>
+                    </div>
+                    <div class="eth-token-divider"></div>
+                    <div class="eth-token-item">
+                        <div class="eth-token-value">RENOUNCED</div>
+                        <div class="eth-token-label">Contract</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community -->
+        <section id="community" class="eth-section">
+            <div class="eth-section-inner">
+                <h2 class="eth-section-title">Join the <span class="eth-highlight">Movement</span></h2>
+                <p class="eth-community-desc">The degens have spoken. It's time to PIVOT.</p>
+                <div class="eth-socials">
+                    <a href="https://x.com/i/communities/2032157746808721885" target="_blank" class="eth-social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Join Community
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="eth-footer">
+            <p>$PIVOT — The Great Migration from Solana to Ethereum</p>
+            <p class="eth-footer-disclaimer">$PIVOT is a meme token with no intrinsic value. Not financial advice. DYOR.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

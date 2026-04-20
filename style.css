@@ -1,0 +1,904 @@
+/* ============================================
+   $PIVOT MEME COIN SITE — GLOBAL STYLES
+   ============================================ */
+
+:root {
+    --sol-purple: #9945FF;
+    --sol-green: #14F195;
+    --eth-blue: #627EEA;
+    --eth-dark: #1a1a2e;
+    --eth-white: #fafafa;
+    --danger-red: #ff3333;
+    --fire-orange: #ff6600;
+    --portal-cyan: #00f0ff;
+    --portal-purple: #a855f7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ============================================
+   PAGE SYSTEM
+   ============================================ */
+
+.page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
+}
+
+.page.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ============================================
+   PAGE 1: SOLANA MEME WORLD
+   ============================================ */
+
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 3s ease;
+}
+
+.darkness-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.darkness-overlay.active {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Solana Title */
+.solana-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity 1s ease;
+    pointer-events: none;
+}
+
+.solana-title.hidden {
+    opacity: 0;
+}
+
+.title-glow {
+    display: block;
+    font-family: 'Bangers', cursive;
+    font-size: clamp(60px, 12vw, 160px);
+    color: white;
+    text-shadow:
+        0 0 20px rgba(153, 69, 255, 0.8),
+        0 0 40px rgba(153, 69, 255, 0.6),
+        0 0 80px rgba(153, 69, 255, 0.4),
+        3px 3px 0 rgba(0,0,0,0.5);
+    letter-spacing: 8px;
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+.title-sub {
+    display: block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(14px, 3vw, 28px);
+    color: var(--sol-green);
+    text-shadow: 0 0 15px rgba(20, 241, 149, 0.6);
+    margin-top: 10px;
+    letter-spacing: 6px;
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+/* ============================================
+   BOUNCING MEME COINS
+   ============================================ */
+
+.meme-coin {
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    user-select: none;
+    will-change: transform, left, top;
+}
+
+.meme-coin-inner {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a2e;
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.3),
+        0 0 20px rgba(255, 215, 0, 0.3),
+        inset 0 -3px 8px rgba(0,0,0,0.2);
+    animation: coinBob 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.meme-coin-inner img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.meme-coin-inner img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.meme-coin-label {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    white-space: nowrap;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+@keyframes coinBob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(3deg); }
+    75% { transform: translateY(4px) rotate(-3deg); }
+}
+
+/* ============================================
+   METEORS
+   ============================================ */
+
+.meteor {
+    position: absolute;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.meteor-img {
+    display: block;
+    max-width: 50px;
+    height: auto;
+}
+
+.meteor.falling {
+    animation: meteorFall 1.5s ease-in forwards;
+}
+
+@keyframes meteorFall {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-400px, 110vh);
+        opacity: 0;
+    }
+}
+
+/* Explosion GIF */
+.explosion-gif {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    z-index: 16;
+    pointer-events: none;
+    animation: explosionFade 1.2s ease-out forwards;
+}
+
+@keyframes explosionFade {
+    0% { opacity: 1; transform: scale(0.5); }
+    30% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
+/* Screen flash / shake */
+.screen-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    z-index: 50;
+    pointer-events: none;
+    transition: opacity 0.1s;
+}
+
+.screen-flash.flash {
+    animation: screenShake 0.3s ease, flashPulse 0.3s ease;
+}
+
+@keyframes flashPulse {
+    0% { opacity: 0.4; }
+    100% { opacity: 0; }
+}
+
+@keyframes screenShake {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-5px) translateY(3px); }
+    50% { transform: translateX(5px) translateY(-3px); }
+    75% { transform: translateX(-3px) translateY(5px); }
+}
+
+#page-solana.shaking {
+    animation: pageShake 0.5s ease;
+}
+
+@keyframes pageShake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-8px); }
+    20% { transform: translateX(8px); }
+    30% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    50% { transform: translateX(-4px); }
+    60% { transform: translateX(4px); }
+    70% { transform: translateX(-2px); }
+    80% { transform: translateX(2px); }
+}
+
+/* ============================================
+   PORTAL
+   ============================================ */
+
+.portal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.portal-container.hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.portal-gif {
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.5)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.3));
+    animation: portalPulse 3s ease-in-out infinite;
+}
+
+@keyframes portalPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.portal-text-wrapper {
+    position: absolute;
+    top: -60px;
+    text-align: center;
+    z-index: 31;
+}
+
+.portal-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+}
+
+.portal-eth-label {
+    font-family: 'Bangers', cursive;
+    font-size: 42px;
+    color: white;
+    text-shadow: 0 0 30px var(--portal-cyan), 0 0 60px var(--portal-purple);
+    letter-spacing: 6px;
+}
+
+.pivot-btn {
+    position: absolute;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Bangers', cursive;
+    font-size: 42px;
+    padding: 0;
+    cursor: pointer;
+    letter-spacing: 6px;
+    text-shadow:
+        0 0 20px rgba(0, 240, 255, 0.8),
+        0 0 40px rgba(168, 85, 247, 0.6),
+        0 0 80px rgba(0, 240, 255, 0.4);
+    transition: all 0.3s ease;
+    z-index: 32;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: textPulse 2s ease-in-out infinite;
+}
+
+.pivot-btn:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+    text-shadow:
+        0 0 30px rgba(0, 240, 255, 1),
+        0 0 60px rgba(168, 85, 247, 0.8),
+        0 0 100px rgba(0, 240, 255, 0.6);
+}
+
+.pivot-symbol {
+    font-size: 36px;
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+
+/* ============================================
+   PAGE 2: ETHEREUM WHITE WORLD
+   ============================================ */
+
+#page-ethereum {
+    overflow-y: auto;
+}
+
+.eth-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f5 50%, #e8e8f0 100%);
+    z-index: -1;
+}
+
+/* ETH Nav */
+.eth-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    z-index: 100;
+}
+
+.eth-nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.eth-diamond {
+    font-size: 28px;
+    color: var(--eth-blue);
+}
+
+.eth-brand {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: #1a1a2e;
+    letter-spacing: 1px;
+}
+
+.eth-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.eth-nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.eth-nav-links a:hover {
+    color: var(--eth-blue);
+}
+
+.eth-nav-btn {
+    background: linear-gradient(135deg, var(--eth-blue), #8b5cf6) !important;
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 700 !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 4px 15px rgba(98, 126, 234, 0.3);
+}
+
+.eth-nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(98, 126, 234, 0.5);
+}
+
+/* ETH Hero */
+.eth-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 120px 60px 80px;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.eth-hero-content {
+    flex: 1;
+    max-width: 560px;
+}
+
+.eth-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(98,126,234,0.1), rgba(139,92,246,0.1));
+    border: 1px solid rgba(98,126,234,0.2);
+    color: var(--eth-blue);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.eth-hero-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 56px);
+    color: #1a1a2e;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.eth-highlight {
+    background: linear-gradient(135deg, var(--eth-blue), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.eth-hero-desc {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+
+.eth-hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.eth-btn-primary {
+    background: linear-gradient(135deg, var(--eth-blue), #8b5cf6);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(98,126,234,0.3);
+}
+
+.eth-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(98,126,234,0.5);
+}
+
+.eth-diamond-sm {
+    font-size: 18px;
+}
+
+.eth-btn-secondary {
+    background: white;
+    color: #1a1a2e;
+    border: 2px solid #e0e0e0;
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.eth-btn-secondary:hover {
+    border-color: var(--eth-blue);
+    color: var(--eth-blue);
+    transform: translateY(-3px);
+}
+
+.eth-contract {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f5f5fa;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid #e8e8f0;
+}
+
+.eth-contract-label {
+    font-weight: 700;
+    color: #888;
+    font-size: 13px;
+}
+
+.eth-contract-addr {
+    font-family: monospace;
+    font-size: 13px;
+    color: #555;
+}
+
+.eth-copy-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.eth-copy-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Hero Image */
+.eth-hero-image {
+    flex: 0 0 auto;
+    position: relative;
+}
+
+.eth-meme-img {
+    width: 380px;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 4px solid white;
+    transition: transform 0.3s ease;
+}
+
+.eth-meme-img:hover {
+    transform: rotate(-2deg) scale(1.03);
+}
+
+.eth-hero-image-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(98,126,234,0.15) 0%, transparent 70%);
+    z-index: -1;
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+/* ETH Sections */
+.eth-section {
+    padding: 100px 40px;
+}
+
+.eth-section-alt {
+    background: #f5f5fa;
+}
+
+.eth-section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.eth-section-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 42px);
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Cards */
+.eth-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.eth-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 32px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.eth-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    border-color: rgba(98,126,234,0.3);
+}
+
+.eth-card-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.eth-card h3 {
+    font-weight: 800;
+    font-size: 20px;
+    color: #1a1a2e;
+    margin-bottom: 12px;
+}
+
+.eth-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+/* Tokenomics */
+.eth-tokenomics {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    background: white;
+    border-radius: 24px;
+    padding: 50px 40px;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+}
+
+.eth-token-item {
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.eth-token-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--eth-blue), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.eth-token-label {
+    font-size: 13px;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.eth-token-divider {
+    width: 1px;
+    height: 60px;
+    background: #e0e0e0;
+}
+
+/* Socials */
+.eth-community-desc {
+    text-align: center;
+    color: #666;
+    font-size: 17px;
+    margin-bottom: 40px;
+    margin-top: -30px;
+}
+
+.eth-socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.eth-social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: white;
+    border-radius: 14px;
+    border: 2px solid #eee;
+    text-decoration: none;
+    color: #1a1a2e;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.eth-social-btn:hover {
+    border-color: var(--eth-blue);
+    color: var(--eth-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(98,126,234,0.15);
+}
+
+.eth-social-btn span {
+    font-size: 20px;
+}
+
+/* Footer */
+.eth-footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid #eee;
+    color: #888;
+    font-size: 14px;
+}
+
+.eth-footer-disclaimer {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 8px;
+}
+
+/* ============================================
+   TRANSITION ANIMATION (Portal to ETH)
+   ============================================ */
+
+.transition-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.transition-flash.active {
+    animation: transitionFlash 1.5s ease forwards;
+}
+
+@keyframes transitionFlash {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .eth-hero {
+        flex-direction: column;
+        padding: 100px 24px 60px;
+        text-align: center;
+    }
+
+    .eth-hero-actions {
+        justify-content: center;
+    }
+
+    .eth-meme-img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .eth-nav-links a:not(.eth-nav-btn) {
+        display: none;
+    }
+
+    .eth-nav {
+        padding: 12px 20px;
+    }
+
+    .portal-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .portal-gif { width: 300px; height: 300px; }
+
+    .portal-eth-label { font-size: 28px; }
+    .pivot-btn { font-size: 24px; padding: 12px 36px; }
+
+    .eth-tokenomics {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .eth-token-divider {
+        width: 60px;
+        height: 1px;
+    }
+
+    .meme-coin-inner {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+    }
+}
