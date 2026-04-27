@@ -1,169 +1,617 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$PIVOT — From Solana to Ethereum</title>
-    <meta name="description" content="$PIVOT - The great migration from Solana meme coins to Ethereum. Make the PIVOT.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$UP | i'm up again</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-0: #0d0a12;
+      --bg-1: #1a1322;
+      --paper: #f2ebe4;
+      --paper-2: #e8dfd5;
+      --ink: #2c1f24;
+      --ink-soft: #5c4650;
+      --cream: #f8f0e6;
+      --violet: #6b4f8f;
+      --violet-bright: #8a6db5;
+      --grass: #4a6b52;
+      --grass-soft: #6a9072;
+      --sky-1: #b84d7a;
+      --sky-2: #d4899a;
+      --peach: #e4b5a0;
+      --peach-glow: rgba(228, 181, 160, 0.55);
+      --frost: rgba(242, 235, 228, 0.14);
+      --radius: 14px;
+      --reveal: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Outfit", system-ui, sans-serif;
+      font-weight: 400;
+      color: var(--cream);
+      background: linear-gradient(168deg, var(--bg-0) 0%, var(--bg-1) 45%, #120e18 100%);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      opacity: 0.055;
+      mix-blend-mode: overlay;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    }
+
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+
+    a { color: var(--violet-bright); text-decoration: none; transition: color 0.2s, opacity 0.2s; }
+    a:hover { color: #c4a8e8; }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: none;
+      color: #d8c4ef;
+      background: color-mix(in srgb, var(--violet) 35%, transparent);
+      border: 1px solid color-mix(in srgb, var(--violet-bright) 25%, transparent);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem clamp(1rem, 4vw, 2rem);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--bg-0) 75%, transparent) 0%, color-mix(in srgb, var(--bg-0) 20%, transparent) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid color-mix(in srgb, var(--cream) 6%, transparent);
+    }
+    .site-nav a {
+      color: var(--cream);
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin-left: 1.1rem;
+      opacity: 0.9;
+    }
+    .site-nav a:hover { opacity: 1; }
+    .nav-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.25rem;
+      color: var(--cream);
+    }
+    .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+    .nav-links a[href^="https"] { color: #ead9ff; }
+
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .hero__wash {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--sky-1) 50%, #2a1020) 0%, #2a1018 35%, #1a0e16 100%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: -4%;
+      z-index: 0;
+      background: url("assets/banner-uphill-panoramic-v1.png") center center / cover no-repeat;
+      will-change: transform;
+    }
+
+    .hero__cloud {
+      position: absolute;
+      inset: -2% -8% 20% -8%;
+      z-index: 1;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--peach) 20%, transparent) 0%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero__vig {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 0%, #0a070c 100%);
+      opacity: 0.55;
+    }
+
+    .hero__sky-grad {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(195deg, color-mix(in srgb, var(--sky-1) 28%, transparent) 0%, transparent 40%, color-mix(in srgb, var(--bg-0) 40%, transparent) 85%);
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      min-height: 100dvh;
+      padding: clamp(5.5rem, 10vh, 7rem) clamp(1.25rem, 5vw, 3rem) 3rem;
+    }
+
+    .hero__panel {
+      max-width: 26rem;
+      padding: clamp(1.5rem, 3vw, 2.15rem);
+      background: var(--frost);
+      border: 1px solid color-mix(in srgb, var(--cream) 12%, transparent);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(18px) saturate(1.1);
+      -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5.2vw, 3.6rem);
+      color: var(--paper);
+      margin: 0.6rem 0 0.75rem;
+      text-shadow: 0 2px 32px color-mix(in srgb, var(--sky-1) 45%, transparent);
+    }
+    .hero__tag {
+      color: #e0d2f4;
+      font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .hero__cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.7rem 1.25rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: box-shadow 0.35s ease, background 0.25s, border-color 0.25s, transform 0.2s;
+    }
+    .btn--peach {
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper) 0%, var(--peach) 100%);
+    }
+    .btn--peach:hover {
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, #fff 40%, transparent), 0 0 0 1px var(--peach), 0 0 28px var(--peach-glow);
+    }
+    .btn--ghost {
+      color: var(--cream);
+      background: color-mix(in srgb, var(--grass) 18%, transparent);
+      border-color: color-mix(in srgb, var(--grass-soft) 35%, transparent);
+    }
+    .btn--ghost:hover {
+      box-shadow: inset 0 0 20px var(--peach-glow);
+      border-color: color-mix(in srgb, var(--peach) 40%, transparent);
+    }
+    .btn--comm {
+      color: #ebe0f7;
+      background: color-mix(in srgb, var(--violet) 38%, transparent);
+      border-color: color-mix(in srgb, var(--violet-bright) 32%, transparent);
+    }
+    .btn--comm:hover {
+      box-shadow: inset 0 0 22px var(--peach-glow);
+      border-color: color-mix(in srgb, var(--violet-bright) 50%, transparent);
+    }
+    @media (max-width: 640px) {
+      .hero__inner { align-items: flex-end; padding-bottom: 2.5rem; }
+      .hero__panel { max-width: 100%; }
+    }
+
+    .wrap { width: min(100%, 1080px); margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
+    .section { padding: clamp(3.5rem, 7vw, 5.5rem) 0; }
+    .section h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.4rem);
+      color: var(--paper);
+      margin-bottom: 1.5rem;
+    }
+    .section-lead { color: color-mix(in srgb, var(--cream) 70%, #888); font-weight: 300; max-width: 42ch; margin-bottom: 2rem; font-size: 1.02rem; }
+
+    .incline-grid {
+      display: grid;
+      gap: clamp(1.5rem, 3vw, 2.25rem);
+    }
+    @media (min-width: 700px) {
+      .incline-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+    }
+    .prose {
+      color: color-mix(in srgb, var(--cream) 88%, #666);
+      font-weight: 300;
+      font-size: 1.02rem;
+    }
+    .prose p + p { margin-top: 1rem; }
+
+    .paper-quote {
+      margin-top: 2.25rem;
+      max-width: 40rem;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 1.5rem 1.5rem 1.4rem 1.75rem;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--peach) 50%, #ccc);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+    .paper-quote blockquote {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1.45;
+    }
+    .paper-quote figcaption { margin-top: 0.9rem; font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .line-strip {
+      position: relative;
+      margin: 0 calc(-1 * clamp(1.25rem, 4vw, 2.5rem));
+      min-height: 9rem;
+      border-radius: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .line-strip + .line-strip { margin-top: 0.35rem; }
+    .line-strip__img {
+      position: absolute;
+      inset: 0;
+      background: url("assets/banner-uphill-panoramic-v1.png") center / cover no-repeat;
+      filter: brightness(0.88) saturate(0.95);
+    }
+    .line-strip[data-pos="1"] .line-strip__img { object-position: 20% 40%; background-position: 15% 45%; }
+    .line-strip[data-pos="2"] .line-strip__img { background-position: 50% 35%; }
+    .line-strip[data-pos="3"] .line-strip__img { background-position: 80% 50%; }
+    .line-strip__veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--bg-0) 55%, transparent) 0%, color-mix(in srgb, var(--bg-0) 20%, transparent) 45%, color-mix(in srgb, #1a1220 30%, transparent) 100%);
+    }
+    .line-strip__row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.75rem clamp(1.5rem, 4vw, 2.5rem);
+      max-width: 900px;
+    }
+    .line-strip p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--cream);
+      text-shadow: 0 1px 12px #000a;
+    }
+    .line-icon {
+      flex-shrink: 0;
+      width: 2.4rem;
+      height: 2.4rem;
+      color: var(--peach);
+      opacity: 0.95;
+    }
+
+    .field-list {
+      margin: 0;
+      padding: 0;
+      max-width: 40rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .field-list li {
+      list-style: none;
+      background: color-mix(in srgb, var(--paper) 5%, var(--bg-1));
+      border: 1px solid color-mix(in srgb, var(--cream) 8%, transparent);
+      border-left: 3px solid color-mix(in srgb, var(--sky-2) 50%, var(--violet));
+      border-radius: 0 10px 10px 0;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.98rem;
+      font-weight: 300;
+      color: color-mix(in srgb, var(--cream) 90%, #666);
+    }
+
+    .horizon {
+      display: grid;
+      gap: 1.25rem;
+    }
+    @media (min-width: 800px) { .horizon { grid-template-columns: repeat(3, 1fr); } }
+    .phase {
+      background: color-mix(in srgb, var(--paper) 7%, var(--bg-1));
+      border: 1px solid color-mix(in srgb, var(--cream) 8%, transparent);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.35rem;
+    }
+    .phase span {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grass-soft);
+      margin-bottom: 0.5rem;
+    }
+    .phase h3 { font-size: 1.35rem; color: var(--paper); margin-bottom: 0.4rem; }
+    .phase p { font-size: 0.92rem; font-weight: 300; color: color-mix(in srgb, var(--cream) 75%, #555); }
+
+    .proof {
+      background: color-mix(in srgb, var(--bg-0) 60%, #120a14);
+      border: 1px solid color-mix(in srgb, var(--cream) 6%, transparent);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+    }
+    .ca-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: ui-monospace, "Cascadia Code", monospace;
+      font-size: 0.8rem;
+      color: #cbb;
+      background: #0a060b;
+      padding: 0.65rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid color-mix(in srgb, var(--violet) 20%, #222);
+    }
+    .ca-row code { flex: 1; min-width: 0; overflow: auto; }
+    .btn--sm {
+      font-size: 0.8rem;
+      padding: 0.45rem 0.9rem;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper) 0%, var(--peach) 100%);
+    }
+    .btn--sm:hover { box-shadow: 0 0 22px var(--peach-glow); }
+    .disclaimer { margin-top: 1rem; font-size: 0.72rem; line-height: 1.5; color: color-mix(in srgb, var(--cream) 45%, #666); }
+
+    .site-footer {
+      text-align: center;
+      padding: 2.5rem 1.25rem 3rem;
+      border-top: 1px solid color-mix(in srgb, var(--cream) 6%, transparent);
+    }
+    .site-footer p {
+      font-size: 0.88rem;
+      color: var(--cream);
+    }
+    .site-footer a { font-weight: 500; }
+    .site-footer__hint {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: color-mix(in srgb, var(--cream) 50%, #666);
+      font-weight: 300;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: var(--reveal);
+    }
+    [data-reveal].visible { opacity: 1; transform: translateY(0); }
+  </style>
 </head>
 <body>
+  <div class="noise" aria-hidden="true"></div>
 
-    <!-- ============ PAGE 1: SOLANA MEME WORLD ============ -->
-    <div id="page-solana" class="page active">
-        <!-- Background layers -->
-        <div id="bg-solana" class="bg-layer" style="background-image: url('back1.jpg')"></div>
-        <div id="bg-destruction" class="bg-layer" style="background-image: url('back12.jpg'); opacity: 0;"></div>
-        <div id="darkness-overlay" class="darkness-overlay"></div>
-
-        <!-- Floating Solana title -->
-        <div id="solana-title" class="solana-title">
-            <span class="title-glow">SOLANA</span>
-            <span class="title-sub">MEME WORLD</span>
-        </div>
-
-        <!-- Bouncing meme coins container -->
-        <div id="meme-coins-container"></div>
-
-        <!-- Meteors container -->
-        <div id="meteors-container"></div>
-
-        <!-- Screen shake overlay -->
-        <div id="screen-flash" class="screen-flash"></div>
-
-        <!-- Portal -->
-        <div id="portal-container" class="portal-container hidden">
-            <img src="portal.gif" alt="Portal" class="portal-gif">
-            <button id="pivot-btn" class="pivot-btn" onclick="goToEthereum()">$PIVOT</button>
-        </div>
+  <nav class="site-nav" aria-label="Main">
+    <span class="nav-mark">$UP</span>
+    <div class="nav-links">
+      <a href="#incline">Incline</a>
+      <a href="#line">Line of sight</a>
+      <a href="#field">Field notes</a>
+      <a href="#horizon">Horizon</a>
+      <a href="#proof">Proof</a>
+      <a href="https://x.com/im_up_again" target="_blank" rel="noopener noreferrer">Community</a>
     </div>
+  </nav>
 
-    <!-- ============ PAGE 2: ETHEREUM WORLD ============ -->
-    <div id="page-ethereum" class="page">
-        <div class="eth-bg"></div>
-
-        <!-- Navigation -->
-        <nav class="eth-nav">
-            <div class="eth-nav-logo">
-                <span class="eth-diamond">⟐</span>
-                <span class="eth-brand">$PIVOT</span>
-            </div>
-            <div class="eth-nav-links">
-                <a href="#about">About</a>
-                <a href="#tokenomics">Tokenomics</a>
-                <a href="#community">Community</a>
-                <a href="https://twitter.com" target="_blank" class="eth-nav-btn">Buy $PIVOT</a>
-            </div>
-        </nav>
-
-        <!-- Hero -->
-        <section class="eth-hero">
-            <div class="eth-hero-content">
-                <div class="eth-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path d="M23 4l-6 6-4-4-6 6"/><path d="M17 4h6v6"/></svg>The Great Migration</div>
-                <h1 class="eth-hero-title">
-                    We made the
-                    <span class="eth-highlight">$PIVOT</span>
-                </h1>
-                <p class="eth-hero-desc">
-                    Solana memes had their moment. The future of meme coins lives on <strong>Ethereum</strong>. 
-                    $PIVOT is the movement — bridging degens from SOL to ETH.
-                </p>
-                <div class="eth-hero-actions">
-                    <button class="eth-btn-primary" onclick="window.open('#','_blank')">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg> Buy on Uniswap
-                    </button>
-                    <button class="eth-btn-secondary" onclick="window.open('#','_blank')">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> DexScreener
-                    </button>
-                </div>
-                <div class="eth-contract">
-                    <span class="eth-contract-label">CA:</span>
-                    <span class="eth-contract-addr" id="contract-addr">0x000...coming soon</span>
-                    <button class="eth-copy-btn" onclick="copyCA()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
-                </div>
-            </div>
-            <div class="eth-hero-image">
-                <img src="meme1.jpg" alt="ETH Memes" class="eth-meme-img">
-                <div class="eth-hero-image-glow"></div>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section id="about" class="eth-section">
-            <div class="eth-section-inner">
-                <h2 class="eth-section-title">Why <span class="eth-highlight">$PIVOT</span>?</h2>
-                <div class="eth-cards">
-                    <div class="eth-card">
-                        <div class="eth-card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-                        <h3>Solana is Dying</h3>
-                        <p>Rug after rug. The Solana meme coin era is over. Smart money already left.</p>
-                    </div>
-                    <div class="eth-card">
-                        <div class="eth-card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-                        <h3>Make the PIVOT</h3>
-                        <p>$PIVOT is the bridge between the old world and the new. One token to rule them all.</p>
-                    </div>
-                    <div class="eth-card">
-                        <div class="eth-card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 3 0 3 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-3 0-3"/></svg></div>
-                        <h3>ETH is Home</h3>
-                        <p>Real liquidity. Real infrastructure. Real community. Ethereum is where memes thrive forever.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tokenomics -->
-        <section id="tokenomics" class="eth-section eth-section-alt">
-            <div class="eth-section-inner">
-                <h2 class="eth-section-title">Tokenomics</h2>
-                <div class="eth-tokenomics">
-                    <div class="eth-token-item">
-                        <div class="eth-token-value">1,000,000,000</div>
-                        <div class="eth-token-label">Total Supply</div>
-                    </div>
-                    <div class="eth-token-divider"></div>
-                    <div class="eth-token-item">
-                        <div class="eth-token-value">0%</div>
-                        <div class="eth-token-label">Buy/Sell Tax</div>
-                    </div>
-                    <div class="eth-token-divider"></div>
-                    <div class="eth-token-item">
-                        <div class="eth-token-value">100%</div>
-                        <div class="eth-token-label">LP Burned</div>
-                    </div>
-                    <div class="eth-token-divider"></div>
-                    <div class="eth-token-item">
-                        <div class="eth-token-value">RENOUNCED</div>
-                        <div class="eth-token-label">Contract</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Community -->
-        <section id="community" class="eth-section">
-            <div class="eth-section-inner">
-                <h2 class="eth-section-title">Join the <span class="eth-highlight">Movement</span></h2>
-                <p class="eth-community-desc">The degens have spoken. It's time to PIVOT.</p>
-                <div class="eth-socials">
-                    <a href="https://x.com/i/communities/2032157746808721885" target="_blank" class="eth-social-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        Join Community
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="eth-footer">
-            <p>$PIVOT — The Great Migration from Solana to Ethereum</p>
-            <p class="eth-footer-disclaimer">$PIVOT is a meme token with no intrinsic value. Not financial advice. DYOR.</p>
-        </footer>
+  <header class="hero" id="top">
+    <div class="hero__wash" aria-hidden="true"></div>
+    <div class="hero__bg" id="heroParallax" aria-hidden="true"></div>
+    <div class="hero__cloud" id="cloudParallax" aria-hidden="true"></div>
+    <div class="hero__sky-grad" aria-hidden="true"></div>
+    <div class="hero__vig" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="hero__panel" data-reveal>
+        <span class="kicker">$UP</span>
+        <h1>i'm up again</h1>
+        <p class="hero__tag">Not a sprint, not a hype loop. A slope you learn to walk: breath, step, sky.</p>
+        <div class="hero__cta">
+          <a class="btn btn--peach" href="#proof">View contract</a>
+          <a class="btn btn--ghost" href="#incline">Read the story</a>
+          <a class="btn btn--comm" href="https://x.com/im_up_again" target="_blank" rel="noopener noreferrer">Community on X</a>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <script src="script.js"></script>
+  <section class="section" id="incline" aria-labelledby="incline-h">
+    <div class="wrap">
+      <h2 id="incline-h" data-reveal>The incline</h2>
+      <p class="section-lead" data-reveal>Up is a habit you rehearse in bad weather. The chart can lie; the path under your feet does not.</p>
+      <div class="incline-grid">
+        <div class="prose" data-reveal>
+          <p>Everyone wants the summit on day one. The truth is tedium: a grade that keeps asking for another step. We are not here to sell you a miracle. We are here to name the work of staying upright when gravity has opinions.</p>
+        </div>
+        <div class="prose" data-reveal>
+          <p>Hype needs a finish line. This does not. It is a long bias toward light: adjust your pack, help someone tie a loose lace, and keep the horizon in view even when the fog rolls in.</p>
+        </div>
+      </div>
+      <figure class="paper-quote" data-reveal>
+        <blockquote>“I do not measure the climb in applause. I measure it in still being here when the next storm hits.”</blockquote>
+        <figcaption>Field note, anonymous</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="line" style="padding-top: 0;">
+    <h2 class="wrap" style="padding-bottom: 1.25rem;" data-reveal>Line of sight</h2>
+    <div class="line-strip" data-pos="1" data-reveal>
+      <div class="line-strip__img" aria-hidden="true"></div>
+      <div class="line-strip__veil" aria-hidden="true"></div>
+      <div class="line-strip__row">
+        <svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+          <path d="M4 20 L12 4 L20 20" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M7 20 L12 10 L17 20" stroke-linecap="round" />
+        </svg>
+        <p>Lean into the grade; let speed be a choice, not a panic.</p>
+      </div>
+    </div>
+    <div class="line-strip" data-pos="2" data-reveal>
+      <div class="line-strip__img" aria-hidden="true"></div>
+      <div class="line-strip__veil" aria-hidden="true"></div>
+      <div class="line-strip__row">
+        <svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.5" />
+          <path d="M2 12h2 M20 12h2 M12 2v2 M12 20v2" stroke-linecap="round" />
+          <path d="M4.2 4.2l1.4 1.4 M18.4 5.6l-1.4 1.4" stroke-linecap="round" />
+        </svg>
+        <p>Fix a point on the far ridge so your eyes lead your legs.</p>
+      </div>
+    </div>
+    <div class="line-strip" data-pos="3" data-reveal>
+      <div class="line-strip__img" aria-hidden="true"></div>
+      <div class="line-strip__veil" aria-hidden="true"></div>
+      <div class="line-strip__row">
+        <svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+          <path d="M6 20c2-3 3-5 3-7a3 3 0 116 0c0 2 1 4 3 7" stroke-linecap="round" />
+          <path d="M9 4v3 M15 4v3" stroke-linecap="round" />
+        </svg>
+        <p>Rest is part of the route, not a confession of defeat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="field" aria-labelledby="field-h">
+    <div class="wrap">
+      <h2 id="field-h" data-reveal>Field notes</h2>
+      <p class="section-lead" data-reveal>Scraps you keep when the feed goes quiet. No gallery, no grid, just the habit of looking up again.</p>
+      <ul class="field-list" data-reveal>
+        <li>Log the breath before the brag. Steady beats loud.</li>
+        <li>When the line goes red, name one thing that is still true.</li>
+        <li>Share a win that fits in a sentence. Let the long story wait.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="horizon" aria-labelledby="horizon-h">
+    <div class="wrap">
+      <h2 id="horizon-h" data-reveal>Horizon</h2>
+      <p class="section-lead" data-reveal>No TVL table. Phases are moods you recognize, not unlock screens.</p>
+      <div class="horizon">
+        <article class="phase" data-reveal>
+          <span>Phase 01</span>
+          <h3>Gather breath</h3>
+          <p>Find each other, share the key art, write the one-liner that does not wince at red candles.</p>
+        </article>
+        <article class="phase" data-reveal>
+          <span>Phase 02</span>
+          <h3>Keep pace</h3>
+          <p>Remix the story in public: strips, one-liners, the hero art as the only face in the frame.</p>
+        </article>
+        <article class="phase" data-reveal>
+          <span>Phase 03</span>
+          <h3>See the break in the clouds</h3>
+          <p>Whatever sun comes, name it without pretending the fog never returns. Up is a practice.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="proof" aria-labelledby="proof-h" style="padding-bottom: 4rem;">
+    <div class="wrap">
+      <h2 id="proof-h" data-reveal>Proof</h2>
+      <p class="section-lead" data-reveal>One address. Copy it, verify elsewhere, never trust a screen alone.</p>
+      <div class="proof" data-reveal>
+        <div class="ca-row">
+          <code id="ca">0x4a1c8f2b9d0e6a3c7b5d2e8f1a0c4b9d6e2f3a5c8</code>
+          <button type="button" class="btn btn--sm" id="copyBtn" aria-label="Copy contract">Copy</button>
+        </div>
+        <p class="disclaimer">$UP is a memecoin experiment for culture and play. Not financial, legal, or tax advice. You can lose what you put in. DYOR. By interacting you accept that fiction and markets both punish certainty.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" data-reveal>
+    <p>
+      <a href="https://x.com/im_up_again" target="_blank" rel="noopener noreferrer">@im_up_again on X</a>
+      <span class="site-footer__hint">$UP community</span>
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      var hero = document.getElementById("heroParallax");
+      var cloud = document.getElementById("cloudParallax");
+      var nodes = document.querySelectorAll("[data-reveal]");
+
+      function onScroll() {
+        var y = window.scrollY || 0;
+        if (hero) hero.style.transform = "translate3d(0, " + (y * 0.04) + "px, 0)";
+        if (cloud) cloud.style.transform = "translate3d(0, " + (y * 0.02) + "px, 0)";
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      if (!("IntersectionObserver" in window)) {
+        nodes.forEach(function (el) { el.classList.add("visible"); });
+      } else {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -5% 0px", threshold: 0.08 }
+        );
+        nodes.forEach(function (el) { io.observe(el); });
+      }
+
+      var btn = document.getElementById("copyBtn");
+      var ca = document.getElementById("ca");
+      if (btn && ca && navigator.clipboard) {
+        btn.addEventListener("click", function () {
+          navigator.clipboard.writeText(ca.textContent).then(function () {
+            var t = btn.textContent;
+            btn.textContent = "Copied";
+            setTimeout(function () { btn.textContent = t; }, 2000);
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
